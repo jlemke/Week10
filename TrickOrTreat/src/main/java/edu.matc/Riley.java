@@ -20,12 +20,14 @@ public class Riley extends Thread {
         while(children.getTotalChildren() <= 100) {
 
             synchronized(children) {
+                //check if any children are at the door
                 if (children.getChildCount() > 0) {
                     childrenAtDoor = true;
                 }
             }
 
             if (childrenAtDoor) {
+                //answer door
                 try {
                     System.out.println("Riley answers the door");
                     answeringDoor();
@@ -44,7 +46,7 @@ public class Riley extends Thread {
     }
 
     public void answeringDoor() throws InterruptedException {
-        //wait 3 seconds
+        //wait 3 seconds while handing out candy
         try {
             sleep(300);
         } catch (InterruptedException e) {
@@ -60,6 +62,7 @@ public class Riley extends Thread {
         children.removeChild();
         System.out.println("Riley gave candy to a child.");
         synchronized(children) {
+            //if there are still children at the door, keep handing out candy
             if (children.getChildCount() > 0)
                 answeringDoor();
             else

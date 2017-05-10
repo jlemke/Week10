@@ -14,8 +14,10 @@ public class ChildFactory extends Thread {
 
     public void run() {
         while(children.getTotalChildren() <= 100) {
+            //create a new child
             newChild();
             try {
+                //sleep a random amount of time between 100 and 400 ms
                 sleep((int) (Math.random() * 3 + 1) * 100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -28,6 +30,7 @@ public class ChildFactory extends Thread {
 
     }
 
+    //prints the child number in console
     synchronized public void ringDoorBell() {
         System.out.println("Child " + children.getTotalChildren() + " rings the doorbell");
     }
